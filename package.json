@@ -1,0 +1,14 @@
+{
+  "name": "hindukush-biosphere",
+  "version": "2.5.0",
+  "private": true,
+  "description": "Offline-first Chitral biodiversity atlas with Pl@ntNet online plant and disease photo screening, offline visual-pattern screening and symptom matching",
+  "scripts": {
+    "start": "npx serve .",
+    "check": "node --check script.js && node --check biosphere-upgrades.js && node --check final-polish.js && node --check api/plant-identify.js && node --check api/plant-disease.js",
+    "test": "node tests/plant-identify.test.mjs && node tests/plant-disease.test.mjs"
+    
+ },
+  "dependencies": {},
+  "type": "module"
+}

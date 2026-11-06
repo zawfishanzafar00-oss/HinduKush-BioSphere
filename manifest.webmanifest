@@ -1,0 +1,17 @@
+{
+  "name": "HinduKush BioSphere",
+  "short_name": "BioSphere",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#06271d",
+  "theme_color": "#063b2b",
+  "description": "Offline-first regional biodiversity field archive for Chitral and the Hindu Kush.",
+  "icons": [
+    {
+      "src": "./assets/markhor-vine-emblem.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}
