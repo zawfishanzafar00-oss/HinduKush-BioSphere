@@ -242,8 +242,13 @@
     pnButton.disabled=true;pnButton.textContent='Analysing photograph…';
     pnResults.classList.remove('hidden');pnResults.textContent='Sending image securely to the configured Pl@ntNet endpoint…';
     try {
-      const fd=new FormData();fd.append('image',pnFile,pnFile.name);
-      const res=await fetch('/api/plant-identify',{method:'POST',body:fd});
+      const upload = await preparePlantUpload(pnFile);
+
+const res = await fetch('/api/plant-identify', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(upload)
+});
       const data=await res.json();
       if(!res.ok) throw new Error(data.error || 'Plant identification service unavailable.');
       const candidates=data.results || [];

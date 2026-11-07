@@ -11,6 +11,7 @@ export default async function handler(req, res) {
   }
 
   const key = process.env.PLANTNET_API_KEY;
+  console.log('[PlantNet] API key available:', Boolean(key));
 
   if (!key) {
     return res.status(503).json({
@@ -22,6 +23,13 @@ export default async function handler(req, res) {
     const body = req.body || {};
     const base64 = body.imageBase64;
     const mimeType = body.mimeType;
+    console.log('[PlantNet] Request diagnostic:', {
+  bodyType: typeof req.body,
+  bodyKeys: body && typeof body === 'object' ? Object.keys(body) : [],
+  imageType: typeof base64,
+  imageLength: typeof base64 === 'string' ? base64.length : 0,
+  mimeType
+});
     const filename = body.filename || 'plant-photo.jpg';
 
     if (
