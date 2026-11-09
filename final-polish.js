@@ -40,7 +40,47 @@ return out;})();exactPhotoCache.set(latin,task);return task;}
 
 if(typeof species!=='undefined'&&typeof loadSpeciesPhoto!=='undefined'){
 
-loadSpeciesPhoto=async function(plant,target){const prefix=target.slice(1)+'-',img=$('#species-image-'+prefix+plant.id),ph=$('#placeholder-'+prefix+plant.id),cr=$('#photo-credit-'+prefix+plant.id);if(!img||img.dataset.finalTried==='1')return;img.dataset.finalTried='1';if(cr)cr.textContent='Searching exact-species open photographs…';try{const arr=await exactPlantPhotos(plant.latin);if(!arr.length)throw Error('No open-licensed exact-species photo found');let i=0;const next=()=>{if(i>=arr.length){if(cr)cr.textContent='No open-licensed exact-species photo could be loaded. See species source.';return;}const x=arr[i++];img.onload=()=>{img.classList.remove('hidden');ph?.classList.add('hidden');if(cr)cr.innerHTML=`Photo: ${esc(x.credit)} · ${esc(x.license)} · <a target="_blank" rel="noopener" href="${esc(x.href)}">source & licence</a>`};img.onerror=next;img.src=x.src;};next();}catch(e){if(cr)cr.textContent='No exact-species open photograph found on connected sources; no unrelated image is used.';img.dataset.finalTried='0';}};
+
+loadSpeciesPhoto = async function(plant, target) {
+  if (!plant) return;
+
+  const prefix = target.slice(1) + '-';
+  const img = $('#species-image-' + prefix + plant.id);
+  const placeholder = $('#placeholder-' + prefix + plant.id);
+  const credit = $('#photo-credit-' + prefix + plant.id);
+
+  if (!img || img.dataset.localTried === '1') return;
+
+  img.dataset.localTried = '1';
+
+  // Convert scientific name into a local image filename.
+  const slug = plant.latin
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+  img.onload = () => {
+    img.classList.remove('hidden');
+    placeholder?.classList.add('hidden');
+
+    if (credit) {
+      credit.textContent = 'Local species image';
+    }
+  };
+
+  img.onerror = () => {
+    img.classList.add('hidden');
+
+    if (credit) {
+      credit.textContent = 'Local image not added yet.';
+    }
+
+    img.dataset.localTried = '0';
+  };
+
+  img.src = `assets/flora/${slug}.webp`;
+};
+
 
 // Force the replacement loader to run after the original page renderer.
 

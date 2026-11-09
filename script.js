@@ -193,7 +193,8 @@ const globalProfiles=[
 ];
 
 globalProfiles.forEach((p)=>{if(species.some(s=>s.latin===p[1]))return;species.push({id:species.length+1,local:p[0],latin:p[1],habit:p[2],family:p[3],description:p[4],features:p[5],flower:p[6],leaf:p[7],habitat:p[8],distribution:p[9],chitral:p[10],locality:p[11],use:p[12],conservation:p[13],reference:p[14],img:null,traits:toTraits(...p[15])})});
-
+// Keep the Flora Atlas limited to its first 25 species.
+species.splice(25);
 const plantMeta = [
 
 ['Aesculus indica','Sapindaceae','Large deciduous tree; palmately compound leaves and upright flower panicles.','White flowers with pink/yellow markings.','Large palmately compound leaves.','Himalayan forests and moist slopes','Himalaya and adjacent mountain regions','Chitral/Hindukush candidate; source-level locality needs confirmation.','No village-level record asserted.','Traditional reports require specific ethnobotanical citation; not medical advice.','Not assessed here'],
@@ -531,27 +532,124 @@ async function commonsPhotos(latin){
  return [];
 
 }
+     async function inatPhotos(latin) {
+  const response = await fetch(
+    'https://api.inaturalist.org/v1/taxa?q=' +
+    encodeURIComponent(latin) +
+    '&rank=species&per_page=10'
+  );
 
-async function loadSpeciesPhoto(s,target){
+  if (!response.ok) throw Error('iNaturalist lookup unavailable');
 
- if(!s)return;const prefix=target.slice(1)+'-';const img=$('#species-image-'+prefix+s.id),placeholder=$('#placeholder-'+prefix+s.id),credit=$('#photo-credit-'+prefix+s.id);
+  const data = await response.json();
+  const expected = nameKey(latin);
 
- if(!img||img.dataset.loaded==='1')return;img.dataset.loaded='1';if(credit)credit.textContent='Checking exact-species records (GBIF / Wikimedia Commons)…';
+  const exact = (data.results || []).find(taxon =>
+    taxon.rank === 'species' &&
+    nameKey(taxon.name) === expected &&
+    taxon.default_photo
+  );
 
- try{
+  if (!exact) return [];
 
-  let pending=photoCache.get(s.latin);
+  return [{
+    src: exact.default_photo.medium_url ||
+         exact.default_photo.square_url,
+    url: 'https://www.inaturalist.org/taxa/' + exact.id,
+    author: 'iNaturalist contributor',
+    license: 'See taxon record for image details',
+    source: 'iNaturalist'
+  }];
+}
+async function loadSpeciesPhoto(s, target) {
+  if (!s) return;
 
-  if(!pending){pending=(async()=>{let candidates=[];try{candidates=await gbifPhotos(s.latin)}catch(e){}if(!candidates.length){try{candidates=await commonsPhotos(s.latin)}catch(e){}}return candidates;})();photoCache.set(s.latin,pending);}
+  const prefix = target.slice(1) + '-';
+  const img = $('#species-image-' + prefix + s.id);
+  const placeholder = $('#placeholder-' + prefix + s.id);
+  const credit = $('#photo-credit-' + prefix + s.id);
 
-  const candidates=await pending;if(!candidates.length)throw Error('No exact-name image record found');
+  if (!img || img.dataset.loaded === '1') return;
 
-  const tryCandidate=index=>{if(index>=candidates.length)throw Error('All candidate images failed to load');const item=candidates[index];img.onload=()=>{img.classList.remove('hidden');placeholder?.classList.add('hidden');if(credit)credit.innerHTML=`Photo: ${esc(item.author)} · ${esc(item.license)} · <a href="${esc(item.url)}" target="_blank" rel="noopener">view ${esc(item.source)} record & licence</a>`;};img.onerror=()=>tryCandidate(index+1);img.src=item.src;};
+  img.dataset.loaded = '1';
 
-  tryCandidate(0);
+  if (credit) {
+    credit.textContent = 'Searching GBIF, Wikimedia Commons and iNaturalist...';
+  }
 
- }catch(e){if(credit)credit.textContent='No verified photo available from GBIF / Wikimedia right now. Try again later; no unrelated image is shown.';img.dataset.loaded='0';}
+  try {
+    let pending = photoCache.get(s.latin);
 
+    if (!pending) {
+      pending = (async () => {
+        let candidates = [];
+
+        try {
+          candidates = await gbifPhotos(s.latin);
+        } catch (e) {}
+
+        if (!candidates.length) {
+          try {
+            candidates = await commonsPhotos(s.latin);
+          } catch (e) {}
+        }
+
+        if (!candidates.length) {
+          try {
+            candidates = await inatPhotos(s.latin);
+          } catch (e) {}
+        }
+
+        return candidates;
+      })();
+
+      photoCache.set(s.latin, pending);
+    }
+
+    const candidates = await pending;
+
+    if (!candidates.length) {
+      throw Error('No matching photograph found');
+    }
+
+    const tryCandidate = (index) => {
+      if (index >= candidates.length) {
+        img.dataset.loaded = '0';
+        if (credit) {
+          credit.textContent =
+            'No verified photograph could be loaded. Please try again later.';
+        }
+        return;
+      }
+
+      const item = candidates[index];
+
+      img.onload = () => {
+        img.classList.remove('hidden');
+        placeholder?.classList.add('hidden');
+
+        if (credit) {
+          credit.innerHTML =
+            `Photo: ${esc(item.author)} · ${esc(item.license)} · ` +
+            `<a href="${esc(item.url)}" target="_blank" rel="noopener">` +
+            `view ${esc(item.source)} record and attribution</a>`;
+        }
+      };
+
+      img.onerror = () => tryCandidate(index + 1);
+      img.src = item.src;
+    };
+
+    tryCandidate(0);
+
+  } catch (e) {
+    if (credit) {
+      credit.textContent =
+        'No matching photograph found in the available sources. Try again later.';
+    }
+
+    img.dataset.loaded = '0';
+  }
 }
 
 let plantFilter='all',atlasFilter='all';

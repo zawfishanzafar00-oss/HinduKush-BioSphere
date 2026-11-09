@@ -53,3 +53,214 @@ body>.sidebar,.sidebar{position:sticky!important;inset:auto!important;top:0!impo
 .hero-banner{min-height:510px!important;border-radius:22px!important;background-image:linear-gradient(90deg,rgba(3,28,20,.48),rgba(3,34,23,.08) 58%,rgba(3,30,22,.2)),url('./assets/hindukush-fullscape.webp')!important;background-position:center 50%!important;background-size:cover!important;border:1px solid rgba(217,229,193,.4)!important;box-shadow:0 25px 70px rgba(0,0,0,.38)!important}
 @media(max-width:1100px){body>.sidebar,.sidebar{align-items:flex-start!important;flex-direction:column!important;gap:5px!important;padding:8px 12px!important}.brand{flex-basis:auto!important;border:0!important;padding:0!important}.brand-emblem{width:44px!important;height:44px!important;flex-basis:44px!important}.side-nav{width:100%!important;flex:0 0 auto!important}.topbar{top:104px!important}}
 @media(max-width:600px){.brand-wordmark b{font-size:20px!important}.side-link{font-size:10px!important;padding:7px 9px!important}.view{padding:17px 12px 35px!important}.hero-banner{min-height:440px!important}.hero-content{padding:48px 22px!important}.hero-content h1{font-size:43px!important}}
+
+/* ==================================================
+   HINDUKUSH BIOSPHERE — LIGHT PANEL TEXT VISIBILITY
+   ================================================== */
+
+/* Main text inside light panels and cards */
+.view .panel,
+.view .panel p,
+.view .panel h1,
+.view .panel h2,
+.view .panel h3,
+.view .panel h4,
+.view .panel label,
+.view .panel b,
+.view .panel strong,
+.view .panel small,
+.view .panel li,
+.view .panel span,
+.view .notice,
+.view .notice b,
+.view .section-heading,
+.view .section-heading h2,
+.view .section-heading p {
+  color: #193d32;
+}
+
+/* Inputs and dropdowns */
+.view input,
+.view select,
+.view textarea {
+  color: #193d32;
+  background-color: #ffffff;
+}
+
+.view input::placeholder,
+.view textarea::placeholder {
+  color: #687b73;
+  opacity: 1;
+}
+
+/* Plant identification and health results */
+/* FAUNA ATLAS — force light cards with dark, readable text */
+.fauna-flip-card,
+.fauna-face {
+  background: #f4f6ed !important;
+  color: #193d32 !important;
+  border-color: #b7c99e !important;
+}
+
+.fauna-face h1,
+.fauna-face h2,
+.fauna-face h3,
+.fauna-face p,
+.fauna-face span,
+.fauna-face div,
+.fauna-face dt,
+.fauna-face dd,
+.fauna-face b,
+.fauna-face strong,
+.fauna-face small,
+.fauna-face .muted {
+  color: #193d32 !important;
+}/* FAUNA ATLAS — restore readable text contrast */
+
+.fauna-flip-card,
+.fauna-face {
+  background: #f4f6ed !important;
+  color: #193d32 !important;
+  border-color: #b7c99e !important;
+}
+
+.fauna-face h1,
+.fauna-face h2,
+.fauna-face h3,
+.fauna-face p,
+.fauna-face span,
+.fauna-face div,
+.fauna-face dt,
+.fauna-face dd,
+.fauna-face b,
+.fauna-face strong,
+.fauna-face small,
+.fauna-face em {
+  color: #193d32 !important;
+}
+
+/* Keep green instruction and status panels readable */
+.fauna-health-panel,
+.fauna-health-panel h2,
+.fauna-health-panel p,
+.fauna-health-panel label,
+.fauna-health-panel .mini-label {
+  color: #ffffff !important;
+}
+/* FAUNA DETECTION — restore contrast on dark Chitral background */
+
+.view .fauna-health-panel,
+.view .fauna-health-panel h1,
+.view .fauna-health-panel h2,
+.view .fauna-health-panel h3,
+.view .fauna-health-panel p,
+.view .fauna-health-panel span,
+.view .fauna-health-panel label,
+.view .fauna-health-panel b,
+.view .fauna-health-panel strong,
+.view .fauna-health-panel small,
+.view .fauna-health-panel .eyebrow,
+.view .fauna-health-panel .mini-label,
+.view .fauna-health-panel .muted {
+  color: #ffffff !important;
+}
+
+.view .fauna-health-panel button,
+.view .fauna-health-panel .btn {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.view .fauna-health-panel button:disabled {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+/* FAUNA DETECTION — targeted contrast correction */
+
+.view:has(#fauna-identify) .mini-label {
+  color: #c9edaa !important;
+  opacity: 1 !important;
+}
+
+.view:has(#fauna-identify) h2 {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  text-shadow: 0 2px 8px #001b12 !important;
+}
+
+.view:has(#fauna-identify) p {
+  color: #f1f4e9 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 5px #001b12 !important;
+}
+
+.view:has(#fauna-identify) .fauna-detect-controls .btn-outline {
+  color: #ffffff !important;
+  background: rgba(3, 35, 24, 0.88) !important;
+  border: 1px solid #c5e69c !important;
+  opacity: 1 !important;
+}
+
+.view:has(#fauna-identify) .fauna-detect-controls .btn-primary {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+/* PLANT DETECTION — contrast correction */
+.view:has(#identify-plant) h1,
+.view:has(#identify-plant) h2,
+.view:has(#identify-plant) h3,
+.view:has(#identify-plant) p,
+.view:has(#identify-plant) label,
+.view:has(#identify-plant) .mini-label,
+.view:has(#identify-plant) .muted {
+  color: #ffffff !important;
+  text-shadow: 0 1px 4px #002016 !important;
+}
+
+/* PLANT HEALTH LAB — contrast correction */
+.view:has(#match-disease) h1,
+.view:has(#match-disease) h2,
+.view:has(#match-disease) h3,
+.view:has(#match-disease) p,
+.view:has(#match-disease) label,
+.view:has(#match-disease) .mini-label,
+.view:has(#match-disease) .muted {
+  color: #ffffff !important;
+  text-shadow: 0 1px 4px #002016 !important;
+}
+
+/* Light result panels must have dark text */
+#identify-results,
+#disease-results,
+#disease-list {
+  background: #ffffff !important;
+  color: #193d32 !important;
+}
+
+#identify-results *,
+#disease-results *,
+#disease-list * {
+  color: #193d32 !important;
+  text-shadow: none !important;
+}
+
+/* Symptom selection buttons */
+.symptom-option {
+  background: #f4f7ef !important;
+  color: #193d32 !important;
+  border: 1px solid #8da995 !important;
+}
+
+.symptom-option.selected {
+  background: #245b43 !important;
+  color: #ffffff !important;
+}
+
+/* Form controls */
+.view:has(#identify-plant) input,
+.view:has(#identify-plant) select,
+.view:has(#match-disease) input,
+.view:has(#match-disease) select {
+  background: #ffffff !important;
+  color: #193d32 !important;
+}
