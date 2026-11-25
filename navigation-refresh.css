@@ -1,6 +1,6 @@
 /* Aurora-inspired, Chitral-specific navigation and homepage typography.
    Scoped to the shared header and homepage hero; existing app views remain intact. */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@600;700&display=swap');
 
 :root{
   --aurora-forest:#183b2b;
@@ -156,8 +156,6 @@ body>.sidebar,.sidebar{
 /* ==========================================================
    CONTRAST PASS — readable type on both light and dark areas
    ========================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap');
-
 /* The top navigation is a light ivory pill: keep its wordmark dark. */
 .sidebar .brand-wordmark b{
   color:#183b2b!important;
