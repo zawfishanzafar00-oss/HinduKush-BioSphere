@@ -1,7 +1,7 @@
 /* Only the two marked background areas are changed. All other site styling stays intact. */
 html, body { background: transparent !important; background-color: transparent !important; background-image: none !important; }
 body { position: relative !important; isolation: isolate !important; }
-.global-background-video { position: fixed !important; inset: 0 !important; width: 100vw !important; height: 100vh !important; object-fit: cover !important; object-position: center center !important; z-index: -1 !important; pointer-events: none !important; }
+.global-background-video { position: fixed !important; inset: 0 !important; width: 100vw !important; height: 100vh !important; object-fit: cover !important; object-position: center center !important; z-index: 0 !important; pointer-events: none !important; }
 /* Let the video show through the top-left brand area and homepage hero. */
 .sidebar, .brand, .topbar, .hero-banner { background: transparent !important; background-image: none !important; }
 .sidebar { border-color: transparent !important; box-shadow: none !important; backdrop-filter: none !important; }
@@ -9,3 +9,15 @@ body { position: relative !important; isolation: isolate !important; }
 .brand { gap: 0 !important; }
 .brand-emblem { display: none !important; }
 .hero-banner:before, .hero-banner:after { background: transparent !important; }
+
+/* Keep the video above the page canvas but below every interactive layer. */
+body > :not(.global-background-video) {
+  position: relative;
+  z-index: 1;
+}
+.global-background-video {
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  background:#17392f;
+}
