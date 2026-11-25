@@ -9,25 +9,44 @@
   <link rel="stylesheet" href="style.css?v=2.5.0"><link rel="stylesheet" href="final-polish.css?v=2.5.0">
   <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="background-video-fix.css?v=1.0.0">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="navigation-refresh.css?v=1.0.0">
 </head>
 <body>
 <video class="global-background-video" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="./assets/chitral-azalea-background.mp4" type="video/mp4"></video>
 
   <aside class="sidebar" id="sidebar">
-    <a class="brand" href="#home" data-view="home"><span class="brand-wordmark"><b>HinduKush<br><i>BioSphere</i></b><small>OBSERVE · UNDERSTAND · CONSERVE</small></span></a>
-    <div class="side-caption">WORKSPACE</div>
+    <a class="brand" href="#home" data-view="home" aria-label="HinduKush BioSphere dashboard">
+      <span class="brand-wordmark"><b>HinduKush<br><i>BioSphere</i></b><small>OBSERVE · UNDERSTAND · CONSERVE</small></span>
+    </a>
     <nav class="side-nav" aria-label="Main navigation">
-      <button class="side-link active" data-view="home"><span>⌂</span>Overview</button>
-      <button class="side-link" data-view="disease"><span>✿</span>Plant Health Lab</button>
-      <button class="side-link" data-view="identify"><span>⌕</span>Plant Detection <i class="new-tag">NEW</i></button>
-      <button class="side-link" data-view="atlas"><span>▤</span>Biodiversity Atlas</button>
-      <button class="side-link" data-view="fauna"><span>◈</span>Fauna Atlas</button>
-      <button class="side-link" data-view="map"><span>⌖</span>Regional Map</button>
-      <button class="side-link" data-view="conservation"><span>✧</span>Conservation</button>
-      <button class="side-link" data-view="community"><span>♧</span>Bio-Observations</button>
-      <button class="side-link" data-view="learn"><span>♜</span>Solve MCQs</button><button class="side-link" data-view="sources"><span>⌘</span>References</button>
+      <button class="side-link active" data-view="home"><span>⌂</span>Dashboard</button>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Flora <span class="nav-chevron">▾</span></button>
+        <div class="nav-dropdown-menu">
+          <button class="side-link" data-view="disease">Plant Health Lab</button>
+          <button class="side-link" data-view="identify">Plant Detection</button>
+          <button class="side-link" data-view="atlas">Flora Atlas</button>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Fauna <span class="nav-chevron">▾</span></button>
+        <div class="nav-dropdown-menu">
+          <button class="side-link" data-view="fauna">Fauna Atlas</button>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Biodiversity <span class="nav-chevron">▾</span></button>
+        <div class="nav-dropdown-menu">
+          <button class="side-link" data-view="map">Regional Map</button>
+          <button class="side-link" data-view="conservation">Conservation</button>
+          <button class="side-link" data-view="community">Bio-Observations</button>
+          <button class="side-link" data-view="sources">References</button>
+        </div>
+      </div>
+      <button class="side-link" data-view="learn"><span>♜</span>MCQs</button>
     </nav>
-    <div class="sidebar-bottom"><div class="sidebar-flower">✿</div><b>Observe. Understand. Conserve.</b><p>A living field archive for the biodiversity of Chitral and the Hindu Kush.</p><span class="prototype-pill">RESEARCH PROTOTYPE</span></div>
+    <button class="nav-cta" type="button" data-go="atlas">Explore Chitral <span>→</span></button>
   </aside>
 
   <main class="main-area">
@@ -157,4 +176,5 @@
   </main>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="script.js"></script>
-<script src="biosphere-upgrades.js"></script><script src="final-polish.js"></script></body></html>
+<script src="biosphere-upgrades.js"></script><script src="final-polish.js"></script><script src="navigation-refresh.js?v=1.0.0"></script>
+</body></html>
