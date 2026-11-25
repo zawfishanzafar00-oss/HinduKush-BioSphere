@@ -151,3 +151,152 @@ body>.sidebar,.sidebar{
   .hero-content h1{font-size:clamp(58px,13vw,82px)!important}
   .hero-content p{font-size:16px!important}
 }
+
+
+/* ==========================================================
+   CONTRAST PASS — readable type on both light and dark areas
+   ========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap');
+
+/* The top navigation is a light ivory pill: keep its wordmark dark. */
+.sidebar .brand-wordmark b{
+  color:#183b2b!important;
+  font-family:'Cormorant Garamond',Georgia,serif!important;
+  font-weight:700!important;
+  text-shadow:none!important;
+}
+.sidebar .brand-wordmark b i{color:#607c5b!important;font-weight:600!important}
+
+/* Homepage title sits over a bright, moving valley: use light script lettering. */
+#view-home .hero-content h1{
+  color:#fffdf4!important;
+  font-family:'Dancing Script',cursive!important;
+  font-size:clamp(76px,9vw,124px)!important;
+  font-weight:700!important;
+  font-style:normal!important;
+  line-height:.98!important;
+  letter-spacing:-1.8px!important;
+  text-shadow:0 3px 5px rgba(7,28,18,.72),0 8px 24px rgba(7,28,18,.48)!important;
+}
+#view-home .hero-content h1 em{
+  color:#e2efcf!important;
+  font-family:'Dancing Script',cursive!important;
+  font-weight:600!important;
+  font-style:italic!important;
+  text-shadow:0 3px 5px rgba(7,28,18,.78),0 8px 24px rgba(7,28,18,.48)!important;
+}
+#view-home .hero-content .eyebrow.light,
+#view-home .hero-content p,
+#view-home .hero-caption{
+  color:#fffdf3!important;
+  text-shadow:0 2px 8px rgba(5,28,18,.82)!important;
+}
+
+/* Content headings over the dark valley/video background. */
+.view:not(#view-home)>.page-title-row,
+.view:not(#view-home)>.page-title-row h1,
+.view:not(#view-home)>.page-title-row p,
+.view:not(#view-home)>.section-heading,
+.view:not(#view-home)>.section-heading h2,
+.view:not(#view-home)>.section-heading p{
+  color:#fffdf2!important;
+  text-shadow:0 2px 8px rgba(0,20,12,.72)!important;
+}
+.view:not(#view-home) .eyebrow,
+.view:not(#view-home) .mini-label{
+  color:#d9efb8!important;
+}
+
+/* Dark glass panels/cards: force readable pale text throughout nested content. */
+.view .panel,
+.view .panel h1,.view .panel h2,.view .panel h3,.view .panel h4,
+.view .panel p,.view .panel label,.view .panel li,
+.view .panel b,.view .panel strong,.view .panel small,
+.view .panel span,.view .panel dt,.view .panel dd,
+.view .quiz-panel,.view .health-api-panel,
+.view .feature-card,.view .feature-card h2,.view .feature-card h3,
+.view .feature-card p,.view .feature-card span{
+  color:#f7f3e7!important;
+}
+.view .panel,.view .quiz-panel,.view .health-api-panel,.view .feature-card{
+  background:rgba(5,35,26,.88)!important;
+  border-color:rgba(218,232,196,.46)!important;
+}
+.view .panel .muted,.view .panel small,.view .feature-card p{
+  color:#e0e9d8!important;
+}
+
+/* Light surfaces/results/forms: dark ink, never pale text on white. */
+.view .match-results,.view .identify-results,
+.view #identify-results,.view #disease-results,.view #disease-list,
+.view .result-panel,.view .results-panel,
+.view .photo-drop,.view .method-card,
+.view .symptom-option,.view .disease-list button,
+.view .quiz-options button,.view .field-grid input,
+.view .field-grid select,.view .field-grid textarea,
+.view .trait-grid select,.view .block-label textarea,
+.view .community-layout input,.view .community-layout select{
+  color:#193b2d!important;
+}
+.view .match-results *,.view .identify-results *,
+.view #identify-results *,.view #disease-results *,
+.view #disease-list *,.view .result-panel *,
+.view .results-panel *{
+  color:#193b2d!important;
+  text-shadow:none!important;
+}
+.view input,.view select,.view textarea{
+  background:#fffdf6!important;color:#193b2d!important;
+  border-color:#9eb59a!important;
+}
+.view input::placeholder,.view textarea::placeholder{
+  color:#63766a!important;opacity:1!important;
+}
+.view button:disabled{opacity:1!important}
+
+/* Flora Atlas cards are dark glass, so their text is light and crisp. */
+.view .species-card,.view .species-card h2,.view .species-card h3,
+.view .species-card p,.view .species-card span,
+.view .species-card strong,.view .species-card small{
+  color:#f7f3e7!important;
+}
+.view .species-card .latin,.view .species-card .use-note{
+  color:#d8edbd!important;
+}
+
+/* Fauna atlas flips are deliberately light cards, so use dark ink. */
+.view .fauna-flip-card,.view .fauna-face{
+  background:#f4f6ed!important;color:#193b2d!important;
+}
+.view .fauna-face h1,.view .fauna-face h2,.view .fauna-face h3,
+.view .fauna-face p,.view .fauna-face span,.view .fauna-face div,
+.view .fauna-face dt,.view .fauna-face dd,.view .fauna-face b,
+.view .fauna-face strong,.view .fauna-face small,.view .fauna-face em{
+  color:#193b2d!important;text-shadow:none!important;
+}
+
+/* Preserve clear labels on dark plant/fauna detection workspaces. */
+.view:has(#identify-plant) h1,.view:has(#identify-plant) h2,
+.view:has(#identify-plant) h3,.view:has(#identify-plant) p,
+.view:has(#identify-plant) label,.view:has(#identify-plant) .mini-label,
+.view:has(#identify-plant) .muted,
+.view:has(#match-disease) h1,.view:has(#match-disease) h2,
+.view:has(#match-disease) h3,.view:has(#match-disease) p,
+.view:has(#match-disease) label,.view:has(#match-disease) .mini-label,
+.view:has(#match-disease) .muted,
+.view:has(#fauna-identify) h1,.view:has(#fauna-identify) h2,
+.view:has(#fauna-identify) h3,.view:has(#fauna-identify) p,
+.view:has(#fauna-identify) label,.view:has(#fauna-identify) .mini-label,
+.view:has(#fauna-identify) .muted{
+  color:#fffdf2!important;
+  text-shadow:0 1px 5px rgba(0,22,14,.82)!important;
+}
+.view:has(#identify-plant) .match-results *,
+.view:has(#match-disease) .match-results *,
+.view:has(#identify-plant) #identify-results *,
+.view:has(#match-disease) #disease-results *{
+  color:#193b2d!important;text-shadow:none!important;
+}
+@media(max-width:760px){
+  #view-home .hero-content h1{font-size:clamp(66px,14vw,92px)!important}
+}
